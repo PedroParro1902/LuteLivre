@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 let playerImg = new Image();
-playerImg.src = "src/images/player.jpg"
+playerImg.src = "src/images/player.png"
 
 let player = {
     x: 50,
