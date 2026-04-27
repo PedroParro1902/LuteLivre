@@ -36,7 +36,7 @@ let player = {
 
 //Inimigo
 let enemy = {
-    x: 550,
+    x: 500,
     y: 50,
     width: 50,
     height: 50,
@@ -76,6 +76,11 @@ function draw() {
     if (enemyAlive) {
         ctx.drawImage(enemyImg, enemy.x, enemy.y, enemy.width, enemy.height);
     };
+
+    // Texto
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Vida Inimigo: " + enemy.life, 50, 50)
 };
 
 function update() {
@@ -101,7 +106,6 @@ function update() {
 
     //Colisão com chão Player
     if (
-        player.y + player.height >= chao.y &&
         player.y + player.height >= chao.y &&
         player.vy >= 0
     ) {
@@ -141,7 +145,17 @@ function update() {
     // Morte do Inimigo
     if (enemy.life <= 0) {
         enemyAlive = false;
-        console.log("Inimigo Derrotado!")
+        console.log("Inimigo Derrotado!");
+        enemy.x = -1000;
+    }
+
+    //IA inimigo
+    if (enemyAlive) {
+        if (player.x < enemy.x) {
+            enemy.x -= 2;
+        } else if (player.x > enemy.x) {
+            enemy.x  += 2;
+        }
     }
 };
 
