@@ -2,4 +2,4 @@
 
 Jogo em criação...
 
-**Data Lançamento Oficial: 01/05/2026**
+**Data Lançamento Oficial: 30/04/2026**
