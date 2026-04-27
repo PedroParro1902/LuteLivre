@@ -1,5 +1,5 @@
 # LuteLivre
 
-Jogo em criação...
+Jogo de luta
 
-**Data Lançamento Oficial: 30/04/2026**
+**Divirta-se**
