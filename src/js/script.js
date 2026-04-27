@@ -1,15 +1,26 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+//Tempo de Ataque
 let attackCooldown = 0;
+
+// Imagens Carregadas
 let imagesLoaded = 0;
 
+// Morte Inimigo
+let enemyAlive = true;
+
+// Imagens
 let playerImg = new Image();
 playerImg.src = "src/images/player.png"
-
 let enemyImg = new Image();
 enemyImg.src = "src/images/enemy.png"
+let fundoImg = new Image();
+fundoImg.src = "src/images/fundo.png"
+let chaoImg = new Image();
+chaoImg.src = "src/images/chao.png"
 
+// Jogador
 let player = {
     x: 50,
     y: 50,
@@ -23,6 +34,7 @@ let player = {
     grounded: false
 };
 
+//Inimigo
 let enemy = {
     x: 550,
     y: 50,
@@ -34,6 +46,7 @@ let enemy = {
     life: 100,
 }
 
+// Chão
 let chao = {
     x: 0,
     y: canvas.height / 2,
@@ -41,6 +54,7 @@ let chao = {
     height: 200
 };
 
+// Detector de Teclas
 let keys = {};
 
 document.addEventListener("keydown", e => keys[e.code] = true);
@@ -49,15 +63,19 @@ document.addEventListener("keyup", e => keys[e.code] = false);
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    //Fundo
+    ctx.drawImage(fundoImg, 0, 0, canvas.width, canvas.height);
+
     //Chão
-    ctx.fillStyle = "gray";
-    ctx.fillRect(chao.x, chao.y, chao.width, chao.height);
+    ctx.drawImage(chaoImg, chao.x, chao.y, chao.width, chao.height);
 
     //Player
     ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
 
     //Inimigo
-    ctx.drawImage(enemyImg, enemy.x, enemy.y, enemy.width, enemy.height);
+    if (enemyAlive) {
+        ctx.drawImage(enemyImg, enemy.x, enemy.y, enemy.width, enemy.height);
+    };
 };
 
 function update() {
@@ -78,14 +96,13 @@ function update() {
     player.y += player.vy;
 
     //Gravidade Enemy
-    enemy.vy = enemy.vy || 0;
     enemy.vy += enemy.gravity;
     enemy.y += enemy.vy;
 
     //Colisão com chão Player
     if (
         player.y + player.height >= chao.y &&
-        player.y + player.height <= chao.y + chao.height &&
+        player.y + player.height >= chao.y &&
         player.vy >= 0
     ) {
         player.y = chao.y - player.height;
@@ -94,6 +111,9 @@ function update() {
     } else {
         player.grounded = false;
     }
+    if (player.x < 0) player.x = 0;
+    if (player.x + player.width > canvas.width)
+        player.x = canvas.width - player.width;
 
     //Colisão com o chão Enemy
     if (enemy.y + enemy.height >= chao.y) {
@@ -112,10 +132,16 @@ function update() {
             player.y < enemy.y + enemy.height &&
             player.y + player.height > enemy.y
         ) {
-            enemy.life -= 1;
-            console.log("Acertou", enemy.life);
+            enemy.life -= 5;
+            console.log("Acertou! Vida:", enemy.life);
             attackCooldown = 20;
         }
+    }
+
+    // Morte do Inimigo
+    if (enemy.life <= 0) {
+        enemyAlive = false;
+        console.log("Inimigo Derrotado!")
     }
 };
 
@@ -126,10 +152,13 @@ function loop() {
     requestAnimationFrame(loop);
 };
 
+// Carregamento de Imagens
 function checkStart() {
     imagesLoaded++;
-    if (imagesLoaded === 2) loop()
+    if (imagesLoaded === 4) loop()
 }
 
 playerImg.onload = checkStart;
 enemyImg.onload = checkStart;
+chaoImg.onload = checkStart;
+fundoImg.onload = checkStart;
