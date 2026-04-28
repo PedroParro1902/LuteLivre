@@ -4,11 +4,17 @@ const ctx = canvas.getContext("2d");
 //Tempo de Ataque
 let attackCooldown = 0;
 
+// Tempo de ataque inimigo
+let enemyattackCooldown = 0;
+
 // Imagens Carregadas
 let imagesLoaded = 0;
 
-// Morte Inimigo
+// Vida Inimigo
 let enemyAlive = true;
+
+// Vida Jogador
+let playerAlive = true
 
 // Imagens
 let playerImg = new Image();
@@ -31,7 +37,8 @@ let player = {
     vy: 0,
     jump: -10,
     gravity: 0.5,
-    grounded: false
+    grounded: false,
+    life: 100,
 };
 
 //Inimigo
@@ -70,7 +77,9 @@ function draw() {
     ctx.drawImage(chaoImg, chao.x, chao.y, chao.width, chao.height);
 
     //Player
-    ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+    if (playerAlive) {
+        ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+    };
 
     //Inimigo
     if (enemyAlive) {
@@ -127,8 +136,9 @@ function update() {
 
     //Cooldown
     if (attackCooldown > 0) attackCooldown--;
+    if (enemyattackCooldown > 0) enemyattackCooldown--;
 
-    //Ataque
+    //Ataque do Jogador
     if (keys["KeyK"] && attackCooldown === 0) {
         if (
             player.x < enemy.x + enemy.width &&
@@ -142,11 +152,32 @@ function update() {
         }
     }
 
+    // Ataque do inimigo
+    if (playerAlive && enemyattackCooldown === 0) {
+        if (
+            enemy.x < player.x + player.width &&
+            enemy.x + enemy.width > player.x &&
+            enemy.y < player.y + player.height &&
+            enemy.y + enemy.height > player.y
+        ) {
+            player.life -= 5;
+            console.log("Sua Vida:", player.life);
+            enemyattackCooldown = 30;
+        }
+    }
+
     // Morte do Inimigo
     if (enemy.life <= 0) {
         enemyAlive = false;
         console.log("Inimigo Derrotado!");
         enemy.x = -1000;
+    }
+
+    // Morte do Jogador
+    if (player.life <= 0) {
+        playerAlive = false;
+        console.log("Você MORREU!");
+        player.x = -1000;
     }
 
     //IA inimigo
