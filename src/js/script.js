@@ -1,6 +1,9 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+// Evento
+let currentEvent = "workday";
+
 //Tempo de Ataque
 let attackCooldown = 0;
 
@@ -47,6 +50,7 @@ let enemy = {
     y: 50,
     width: 50,
     height: 50,
+    speed: 3,
     vx: 0,
     vy: 0,
     gravity: 0.5,
@@ -183,14 +187,22 @@ function update() {
     //IA inimigo
     if (enemyAlive) {
         if (player.x < enemy.x) {
-            enemy.x -= 2;
+            enemy.x -= enemy.speed;
         } else if (player.x > enemy.x) {
-            enemy.x  += 2;
+            enemy.x  += enemy.speed;
         }
     }
 };
 
+function applyEvent() {
+    if (currentEvent === "workday") {
+        player.speed = 6;
+        enemy.speed = 6;
+    }
+}
+
 function loop() {
+    applyEvent();
     update();
     draw();
 
