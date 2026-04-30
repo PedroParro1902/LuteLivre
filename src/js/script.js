@@ -197,7 +197,25 @@ function update() {
 function applyEvent() {
     if (currentEvent === "workday") {
         player.speed = 6;
-        enemy.speed = 6;
+        enemy.speed = 4;
+    }
+    if (currentEvent === "beach") {
+        player.speed = 3;
+        player.life = 150;
+        enemy.speed = 2;
+        enemy.life = 150;
+
+        fundoImg.src = "src/images/fundoPraia.png";
+        chaoImg.src = "src/images/chaoPraia.png";
+    }
+    if (currentEvent === "marioBros") {
+        if (keys["KeyF"]) {
+            player.speed = 7;
+        }
+        enemy.speed = 4;
+
+        fundoImg.src = "src/images/fundoMariobros.png";
+        chaoImg.src = "src/images/chaoMariobros.png"
     }
 }
 
