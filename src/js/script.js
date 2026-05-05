@@ -209,10 +209,11 @@ function applyEvent() {
         chaoImg.src = "src/images/chaoPraia.png";
     }
     if (currentEvent === "marioBros") {
+        player.speed = 5;
         if (keys["KeyF"]) {
             player.speed = 7;
         }
-        enemy.speed = 4;
+        enemy.speed = 3;
 
         fundoImg.src = "src/images/fundoMariobros.png";
         chaoImg.src = "src/images/chaoMariobros.png"
