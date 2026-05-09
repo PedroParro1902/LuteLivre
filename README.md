@@ -1,3 +1,7 @@
+<p align="left">
+  <img src="src/images/logo.png" width="300"/>
+</p>
+
 # 🥊 LuteLivre
 
 Um jogo de luta 2D desenvolvido para navegador utilizando HTML, CSS e JavaScript.
