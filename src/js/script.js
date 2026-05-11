@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 // Evento
-let currentEvent = "workday";
+let currentEvent = "marioBros";
 
 //Tempo de Ataque
 let attackCooldown = 0;
@@ -195,10 +195,6 @@ function update() {
 };
 
 function applyEvent() {
-    if (currentEvent === "workday") {
-        player.speed = 6;
-        enemy.speed = 4;
-    }
     if (currentEvent === "beach") {
         player.speed = 3;
         player.life = 150;
