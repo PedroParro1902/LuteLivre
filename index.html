@@ -2,16 +2,24 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>LuteLivre</title>
+    <title>FruitFight</title>
     <link rel="icon" href="src/images/logo2.png">
     <link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body>
 
-    <div class="center">
+    <div id="inicio">
+        <h1>Bem-Vindo ao FruitFight</h1>
+        <h2>Escolha um Jogador</h2>
+        <button  onclick="escolherMaça()">Maça</button>
+        <button onclick="escolherAbacaxi()">Abacaxi</button>
+    </div>
+
+    <div class="center" id="jogo" style="display: none;">
         <canvas id="canvas" width="600px" height="400px"></canvas>
     </div>
 
     <script src="src/js/script.js"></script>
+    <script src="src/js/pagina.js"></script>
 </body>
 </html>

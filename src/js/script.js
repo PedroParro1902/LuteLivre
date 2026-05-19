@@ -4,6 +4,9 @@ const ctx = canvas.getContext("2d");
 // Evento
 let currentEvent = "marioBros";
 
+// Jogador Escolhido
+let playerEscolhido = "Maça";
+
 //Tempo de Ataque
 let attackCooldown = 0;
 
@@ -21,7 +24,14 @@ let playerAlive = true
 
 // Imagens
 let playerImg = new Image();
-playerImg.src = "src/images/player.png"
+function atualizarPlayerImg() {
+    if (playerEscolhido === "Maça") {
+        playerImg.src = "src/images/player.png";
+    }
+    if (playerEscolhido === "Abacaxi") {
+        playerImg.src = "src/images/player(1).png";
+    }
+}
 let enemyImg = new Image();
 enemyImg.src = "src/images/enemy.png"
 let fundoImg = new Image();
@@ -81,7 +91,11 @@ function draw() {
     ctx.drawImage(chaoImg, chao.x, chao.y, chao.width, chao.height);
 
     //Player
-    if (playerAlive) {
+    if (playerAlive && playerEscolhido === "Maça") {
+        ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+    };
+
+    if (playerAlive && playerEscolhido === "Abacaxi") {
         ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
     };
 
