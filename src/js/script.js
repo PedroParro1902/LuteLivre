@@ -59,7 +59,7 @@ let enemy = {
     x: 500,
     y: 50,
     width: 50,
-    height: 50,
+    height: 25,
     speed: 3,
     vx: 0,
     vy: 0,
