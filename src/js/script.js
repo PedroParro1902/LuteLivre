@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 // Evento
-let currentEvent = "marioBros";
+let currentEvent = "beach";
 
 // Jogador Escolhido
 let playerEscolhido = "Maça";
@@ -179,6 +179,7 @@ function update() {
             enemy.y + enemy.height > player.y
         ) {
             player.life -= 5;
+            player.y += 50;
             console.log("Sua Vida:", player.life);
             enemyattackCooldown = 30;
         }
@@ -188,14 +189,12 @@ function update() {
     if (enemy.life <= 0) {
         enemyAlive = false;
         console.log("Inimigo Derrotado!");
-        enemy.x = -1000;
     }
 
     // Morte do Jogador
     if (player.life <= 0) {
         playerAlive = false;
         console.log("Você MORREU!");
-        player.x = -1000;
     }
 
     //IA inimigo

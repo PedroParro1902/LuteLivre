@@ -6,7 +6,7 @@
 
 Um jogo de luta 2D desenvolvido para navegador utilizando HTML, CSS e JavaScript.
 
-> Evento Atual: **Mario Bros**
+> Evento Atual: **Dia de Praia**
 
 🔗 **Jogue agora:**  
 https://pedroparro1902.github.io/LuteLivre/
